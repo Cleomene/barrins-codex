@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>{{ _("L'Art de classifier les decks") }}</h1>
+<div class="author">
+	<img src="#" alt="zombie33" />
+	<p>
+		{% trans %}
+		<em>Présentation de zombie33</em>
+		{% endtrans %}
+	</p>
+	<div class="clear"></div>
+</div>
+{% block section %} {% endblock %}
+{% endblock %}
+
+{% block script%}
+<script>
+	(function () {
+		// DOM will be available here
+		var elements = document.getElementsByClassName("card-block");
+		[].forEach.call(elements, function (elt) {
+			sC(elt.name, elt.id);
+		});
+	})();
+</script>
+{% endblock %}
+
+{#
+var q = new Queue();
+var elements = document.getElementsByClassName("card-block");
+[].forEach.call(elements, function (elt) {
+	q.enqueue([elt.name,elt.id]);
+});
+
+while(!q.isEmpty()){
+	console.log(q.dequeue());
+}
+
+var display = async function (queue) {
+	while (!queue.isEmpty()) {
+		await async_card_url(queue);
+	}
+};
+
+var async_card_url = async function (queue) {
+	// Initiate AJAX function
+	ajaxFunction();
+
+	// callback function
+	ajaxRequest.onreadystatechange = function () {
+		if (ajaxRequest.readyState == 4) { // The request is completed
+			if (ajaxRequest.status == 200) { // HTTP OK
+				console.log("Retour pour "+queue.peek());
+				json = JSON.parse(ajaxRequest.responseText);
+				document.getElementById(queue.peek()[1]).src = json.image_uris.small;
+				queue.dequeue();
+				return true;
+			}
+		}
+	}
+
+	// API URL call
+	var url = "https://api.scryfall.com/cards/named?fuzzy=" + queue.peek()[0];
+
+	// AJAX request
+	ajaxRequest.open("GET", url, true);
+	ajaxRequest.send(null);
+};
+#}
